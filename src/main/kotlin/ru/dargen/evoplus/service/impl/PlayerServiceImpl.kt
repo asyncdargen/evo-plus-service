@@ -48,7 +48,7 @@ class PlayerServiceImpl(
 
     private fun log(text: String) {
         logger.info(text)
-        discordService.log(text)
+        discordService.log("```$text```")
     }
 
 }
