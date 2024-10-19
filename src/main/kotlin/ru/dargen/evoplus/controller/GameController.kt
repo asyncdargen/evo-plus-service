@@ -14,9 +14,9 @@ import ru.dargen.evoplus.service.PlayerService
 class GameController(private val playerService: PlayerService) {
 
     @get:GetMapping("/list")
-    val ingameList get() = ResponseEntity.ok(playerService.ingameList)
+    val players get() = ResponseEntity.ok(playerService.players)
     @get:GetMapping("/count")
-    val count get() = ResponseEntity.ok(playerService.count)
+    val count get() = ResponseEntity.ok(playerService.playersCount)
 
     @PostMapping("/update")
     fun updateIngame(@RequestParam("username") username: String, @RequestParam("version") version: String): ResponseEntity<Boolean> {
@@ -30,7 +30,7 @@ class GameController(private val playerService: PlayerService) {
     }
 
     @PostMapping("/check/batch")
-    fun checkIngame(@RequestBody usernames: Collection<String>): ResponseEntity<List<String>?> {
+    fun checkIngame(@RequestBody usernames: Collection<String>): ResponseEntity<Collection<String>> {
         return ResponseEntity.ok(playerService.filterIngame(usernames))
     }
 

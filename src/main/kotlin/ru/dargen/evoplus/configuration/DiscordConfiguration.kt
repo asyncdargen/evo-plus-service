@@ -5,18 +5,16 @@ import net.dv8tion.jda.api.requests.GatewayIntent
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Lazy
 
 @Configuration
 class DiscordConfiguration {
 
     @Value("\${discord.token}")
-    lateinit var token: String
+    private lateinit var token: String
 
-    @get:Bean("discord.webhook.log")
-    @Value("\${discord.webhook.log}")
-    lateinit var webhook: String
-
+    @get:Lazy
     @get:Bean
-    val discord get() = JDABuilder.createLight(token, GatewayIntent.entries).build()
+    val jda get() = JDABuilder.createLight(token, GatewayIntent.entries).build()
 
 }

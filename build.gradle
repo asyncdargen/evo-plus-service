@@ -7,13 +7,7 @@ plugins {
 }
 
 group = 'ru.dargen'
-version = '0.0.1-SNAPSHOT'
-
-java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
-	}
-}
+version = '1.0.1'
 
 repositories {
 	mavenCentral()
@@ -25,9 +19,12 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.jetbrains.kotlin:kotlin-reflect'
 }
+java {
+	toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+}
 
 kotlin {
-	compilerOptions {
-		freeCompilerArgs.addAll '-Xjsr305=strict'
-	}
+	jvmToolchain(17)
 }
+
+tasks.withType(JavaCompile)*.options*.encoding = 'UTF-8'
