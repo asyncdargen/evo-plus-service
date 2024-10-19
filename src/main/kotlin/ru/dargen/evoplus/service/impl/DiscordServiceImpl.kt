@@ -35,6 +35,8 @@ class DiscordServiceImpl(
         )
     }
 
+    private fun String.reduceMarkdown() = replace("_", "\\_")
+
     @Scheduled(fixedDelay = 10, timeUnit = SECONDS)
     private fun updateStatus() {
         jda.presence.setPresence(Activity.watching("за ${playerService.playersCount} игроками"), false)
